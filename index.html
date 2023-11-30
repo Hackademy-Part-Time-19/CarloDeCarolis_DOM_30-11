@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - creare articolo</title>
+</head>
+
+<label for="name">Titolo:</label>
+<input type="text" id="titolo" placeholder="Titolo" />
+<label for="name">Paragrafo:</label>
+<input type="text" id="paragrafo" placeholder="Descrizione" />
+
+<button onclick="createArticle()">Crea Articolo</button>
+
+<div id="articles-container"
+    style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; height: 100vh;">
+</div>
+
+<script>
+
+    function createArticle() {
+        let titoloInput = document.getElementById('titolo').value;
+        let paragrafoInput = document.getElementById('paragrafo').value;
+
+        if (!titoloInput || !paragrafoInput) {
+            alert("Inserisci sia il titolo che il paragrafo per creare l'articolo.");
+            return;
+        }
+
+        let articolo = document.createElement('article');
+        articolo.setAttribute('style', 'background-color: aqua; width: 600px; height: 300px; border-radius: 20px; margin: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;');
+
+        let titolo = document.createElement('h2');
+        titolo.textContent = titoloInput;
+        titolo.setAttribute('style', 'text-align: center;');
+
+        let paragrafo = document.createElement('p');
+        paragrafo.textContent = paragrafoInput;
+        paragrafo.setAttribute('style', 'text-align: center;');
+
+        let data = document.createElement('p');
+        let currentDate = new Date();
+        data.textContent = 'Data di pubblicazione: ' + currentDate.toLocaleDateString();
+        data.setAttribute('style', 'text-align: center;');
+
+        articolo.appendChild(titolo);
+        articolo.appendChild(paragrafo);
+        articolo.appendChild(data);
+
+        document.getElementById('articles-container').appendChild(articolo);
+        clearInputs();
+    }
+
+    function clearInputs() {
+        document.getElementById('titolo').value = '';
+        document.getElementById('paragrafo').value = '';
+    }
+</script>
+</body>
+
+</html>
